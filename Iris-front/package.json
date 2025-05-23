@@ -1,0 +1,82 @@
+{
+  "name": "iris-segmentation-app",
+  "version": "0.1.0",
+  "private": true,
+  "main": "electron/main.js",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.6.2",
+    "bootstrap": "^5.3.2",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.9.1",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "react-webcam": "^7.2.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "electron:dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron:build": "npm run build && electron-builder",
+    "electron:package:win": "npm run build && electron-builder -w",
+    "electron:package:mac": "npm run build && electron-builder -m",
+    "electron:package:linux": "npm run build && electron-builder -l"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "electron": "^27.1.2",
+    "electron-builder": "^24.6.4",
+    "electron-is-dev": "^2.0.0",
+    "wait-on": "^7.2.0"
+  },
+  "build": {
+    "appId": "com.eyecos.iris-segmentation",
+    "productName": "Iris Segmentation App",
+    "files": [
+      "build/**/*",
+      "electron/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    },
+    "extraResources": [
+      {
+        "from": "../java-backend/netBeans/target/prueba_electron-1.0.0-cli.jar",
+        "to": "app/java-backend/prueba_electron-1.0.0-cli.jar"
+      }
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
+  }
+}
